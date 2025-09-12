@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -9,24 +10,13 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _animation;
-
+class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
 
-    // Animation for symbol/logo
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 2),
-    );
-    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
-    _controller.forward();
-
-    // Navigate to Login after 3 seconds
-    Timer(const Duration(seconds: 3), () {
+    // Navigate to login screen after 3 seconds
+    Timer(const Duration(seconds: 10), () {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const LoginScreen()),
@@ -35,15 +25,11 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   }
 
   @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        width: double.infinity,
+        height: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.green, Colors.lightGreenAccent],
@@ -52,30 +38,33 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
           ),
         ),
         child: Center(
-          child: ScaleTransition(
-            scale: _animation,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: const [
-                Icon(Icons.landscape, size: 100, color: Colors.white), // Splash symbol
-                SizedBox(height: 20),
-                Text(
-                  "Our Village App",
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // 🎬 Lottie Animation
+              Lottie.asset(
+                'assets/animations/village.json',
+                width: 200,
+                height: 200,
+                fit: BoxFit.contain,
+                repeat: true,
+                animate: true,
+              ),
+
+              const SizedBox(height: 20),
+              const Text(
+                "Our Village App",
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
-                Text(
-                  "Connecting People Together",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white70,
-                  ),
-                ),
-              ],
-            ),
+              ),
+              const Text(
+                "Connecting People Together",
+                style: TextStyle(fontSize: 16, color: Colors.white70),
+              ),
+            ],
           ),
         ),
       ),

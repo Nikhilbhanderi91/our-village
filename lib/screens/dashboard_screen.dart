@@ -15,33 +15,83 @@ class _DashboardScreenState extends State<DashboardScreen>
 
   final List<Map<String, dynamic>> dashboardItems = [
     {"titleEn": "Events 📅", "titleGu": "ઇવેન્ટ્સ 📅", "icon": Icons.event},
-    {"titleEn": "About Village 🏡", "titleGu": "ગામ વિષે 🏡", "icon": Icons.info},
-    {"titleEn": "Gallery 🖼️", "titleGu": "ગેલેરી 🖼️", "icon": Icons.photo},
     {"titleEn": "Weather ☀️", "titleGu": "હવામાન ☀️", "icon": Icons.wb_sunny},
-    {"titleEn": "Contacts 📞", "titleGu": "સંપર્ક 📞", "icon": Icons.contact_phone},
-    {"titleEn": "Village Map 🗺️", "titleGu": "ગામ નકશો 🗺️", "icon": Icons.map},
-    {"titleEn": "Daily Quotes 💡", "titleGu": "દૈનિક કોટ્સ 💡", "icon": Icons.lightbulb},
-    {"titleEn": "Announcements 📢", "titleGu": "અધિસૂચનાઓ 📢", "icon": Icons.campaign},
-    {"titleEn": "Shops & Services 🛒", "titleGu": "શોપ્સ & સર્વિસિસ 🛒", "icon": Icons.store},
+    {
+      "titleEn": "Contacts 📞",
+      "titleGu": "સંપર્ક 📞",
+      "icon": Icons.contact_phone,
+    },
+    {
+      "titleEn": "Village Map 🗺️",
+      "titleGu": "ગામ નકશો 🗺️",
+      "icon": Icons.map,
+    },
+    {
+      "titleEn": "Daily Quotes 💡",
+      "titleGu": "દૈનિક કોટ્સ 💡",
+      "icon": Icons.lightbulb,
+    },
+    {
+      "titleEn": "Announcements 📢",
+      "titleGu": "અધિસૂચનાઓ 📢",
+      "icon": Icons.campaign,
+    },
     {"titleEn": "Education 🎓", "titleGu": "શિક્ષણ 🎓", "icon": Icons.school},
-    {"titleEn": "Health 🏥", "titleGu": "આરોગ્ય 🏥", "icon": Icons.health_and_safety},
-    {"titleEn": "Jobs & Opportunities 💼", "titleGu": "જોબ્સ & મોકા 💼", "icon": Icons.work},
-    {"titleEn": "Transport 🚍", "titleGu": "પરિવહન 🚍", "icon": Icons.directions_bus},
-    {"titleEn": "Culture & Festivals 🎉", "titleGu": "સાંસ્કૃતિક & તહેવારો 🎉", "icon": Icons.celebration},
-    {"titleEn": "Tourism & Places 🌄", "titleGu": "પ્રદેશ & પ્રવાસ 🌄", "icon": Icons.landscape},
-    {"titleEn": "Village Development 🛠️", "titleGu": "ગામ વિકાસ 🛠️", "icon": Icons.build},
-    {"titleEn": "Agriculture 🌾", "titleGu": "કૃષિ 🌾", "icon": Icons.agriculture},
-    {"titleEn": "Market Rates 💰", "titleGu": "બજાર ભાવ 💰", "icon": Icons.attach_money},
-    {"titleEn": "Local Business 🏪", "titleGu": "સ્થાનિક બિઝનેસ 🏪", "icon": Icons.business},
-    {"titleEn": "Sports & Youth ⚽", "titleGu": "ક્રીડા & યુવા ⚽", "icon": Icons.sports_soccer},
-    {"titleEn": "Women Empowerment 👩‍🦱", "titleGu": "મહિલા સશક્તિકરણ 👩‍🦱", "icon": Icons.female},
-    {"titleEn": "E-Governance 📑", "titleGu": "ઈ-સરકાર 📑", "icon": Icons.description},
-    {"titleEn": "Blood Donation ❤️", "titleGu": "રક્તદાન ❤️", "icon": Icons.favorite},
-    {"titleEn": "Library 📚", "titleGu": "લાઇબ્રેરી 📚", "icon": Icons.menu_book},
-    {"titleEn": "Volunteer Work 🤝", "titleGu": "સેવાકાર્ય 🤝", "icon": Icons.volunteer_activism},
-    {"titleEn": "Emergency Alerts 🚨", "titleGu": "જરૂરી એલર્ટ 🚨", "icon": Icons.warning},
-    {"titleEn": "Lost & Found 🔎", "titleGu": "ગુમાયું & મળ્યું 🔎", "icon": Icons.search},
-    {"titleEn": "Stories & Legends 📖", "titleGu": "વાર્તાઓ & લોકકથાઓ 📖", "icon": Icons.book},
+    {
+      "titleEn": "Health 🏥",
+      "titleGu": "આરોગ્ય 🏥",
+      "icon": Icons.health_and_safety,
+    },
+    {
+      "titleEn": "Transport 🚍",
+      "titleGu": "પરિવહન 🚍",
+      "icon": Icons.directions_bus,
+    },
+    {
+      "titleEn": "Village Development 🛠️",
+      "titleGu": "ગામ વિકાસ 🛠️",
+      "icon": Icons.build,
+    },
+    {
+      "titleEn": "Agriculture 🌾",
+      "titleGu": "કૃષિ 🌾",
+      "icon": Icons.agriculture,
+    },
+    {
+      "titleEn": "Market Rates 💰",
+      "titleGu": "બજાર ભાવ 💰",
+      "icon": Icons.attach_money,
+    },
+    {
+      "titleEn": "Women Empowerment 👩‍🦱",
+      "titleGu": "મહિલા સશક્તિકરણ 👩‍🦱",
+      "icon": Icons.female,
+    },
+    {
+      "titleEn": "E-Governance 📑",
+      "titleGu": "ઈ-સરકાર 📑",
+      "icon": Icons.description,
+    },
+    {
+      "titleEn": "Blood Donation ❤️",
+      "titleGu": "રક્તદાન ❤️",
+      "icon": Icons.favorite,
+    },
+    {
+      "titleEn": "Volunteer Work 🤝",
+      "titleGu": "સેવાકાર્ય 🤝",
+      "icon": Icons.volunteer_activism,
+    },
+    {
+      "titleEn": "Emergency Alerts 🚨",
+      "titleGu": "જરૂરી એલર્ટ 🚨",
+      "icon": Icons.warning,
+    },
+    {
+      "titleEn": "Lost & Found 🔎",
+      "titleGu": "ગુમાયું & મળ્યું 🔎",
+      "icon": Icons.search,
+    },
   ];
 
   @override
@@ -118,8 +168,8 @@ class _DashboardScreenState extends State<DashboardScreen>
       onTap: () {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-              content: Text(
-                  isEnglish ? item["titleEn"] : item["titleGu"])),
+            content: Text(isEnglish ? item["titleEn"] : item["titleGu"]),
+          ),
         );
       },
       child: Container(
