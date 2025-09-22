@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// import 'package:lottie/lottie.dart';
 import 'dashboard_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -16,9 +17,6 @@ class _LoginScreenState extends State<LoginScreen>
   final String correctEmail = "user12.com";
   final String correctPassword = "1234";
 
-  late AnimationController _logoController;
-  late Animation<double> _logoAnimation;
-
   late AnimationController _cardController;
   late Animation<Offset> _cardOffset;
 
@@ -26,16 +24,6 @@ class _LoginScreenState extends State<LoginScreen>
   void initState() {
     super.initState();
 
-    // Logo bounce animation
-    _logoController = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 2),
-    )..repeat(reverse: true);
-    _logoAnimation = Tween<double>(begin: 0.9, end: 1.1).animate(
-      CurvedAnimation(parent: _logoController, curve: Curves.easeInOut),
-    );
-
-    // Card slide-up animation
     _cardController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 800),
@@ -45,7 +33,6 @@ class _LoginScreenState extends State<LoginScreen>
       end: Offset.zero,
     ).animate(CurvedAnimation(parent: _cardController, curve: Curves.easeOut));
 
-    // Start card animation with delay
     Future.delayed(const Duration(milliseconds: 400), () {
       _cardController.forward();
     });
@@ -53,7 +40,6 @@ class _LoginScreenState extends State<LoginScreen>
 
   @override
   void dispose() {
-    _logoController.dispose();
     _cardController.dispose();
     super.dispose();
   }
@@ -64,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen>
 
     if (email.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Please enter email and password")),
+        const SnackBar(content: Text("⚠ Please enter email and password")),
       );
       return;
     }
@@ -76,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen>
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Invalid email or password")),
+        const SnackBar(content: Text("❌ Invalid email or password")),
       );
     }
   }
@@ -85,102 +71,142 @@ class _LoginScreenState extends State<LoginScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        width: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF81C784), Color(0xFFE8F5E9)],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFFD5E7EE), // background light blue
+              Color(0xFF15F345), // bright green
+              Color(0xFF84F6F6), // cyan content color
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
         ),
         child: Center(
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(24),
-            child: SlideTransition(
-              position: _cardOffset,
-              child: Card(
-                elevation: 12,
-                shadowColor: Colors.green.withOpacity(0.4),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(28),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      ScaleTransition(
-                        scale: _logoAnimation,
-                        child: const Icon(
-                          Icons.person,
-                          size: 90,
-                          color: Colors.green,
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      AnimatedOpacity(
-                        opacity: 1.0,
-                        duration: const Duration(seconds: 1),
-                        child: const Text(
-                          "Welcome Back",
-                          style: TextStyle(
-                            fontSize: 26,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.green,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 30),
-                      TextField(
-                        controller: emailController,
-                        decoration: InputDecoration(
-                          labelText: "Email",
-                          prefixIcon: const Icon(Icons.email),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      TextField(
-                        controller: passwordController,
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          labelText: "Password",
-                          prefixIcon: const Icon(Icons.lock),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 30),
-                      SizedBox(
-                        width: double.infinity,
-                        child: GestureDetector(
-                          onTapDown: (_) => setState(() {}),
-                          onTapUp: (_) => setState(() {}),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.green,
-                              padding: const EdgeInsets.symmetric(vertical: 14),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(14),
-                              ),
+            child: Column(
+              children: [
+                const SizedBox(height: 20),
+
+                // Slide-up Card
+                SlideTransition(
+                  position: _cardOffset,
+                  child: Card(
+                    elevation: 16,
+                    color: Colors.white,
+                    shadowColor: const Color(0xFF15F345).withOpacity(0.4),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(28),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "Welcome Back 👋",
+                            style: const TextStyle(
+                              fontSize: 26,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF15F345), // bright green
                             ),
-                            onPressed: login,
-                            child: const Text(
-                              "Login",
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
+                          ),
+                          const SizedBox(height: 30),
+
+                          // Email
+                          TextField(
+                            controller: emailController,
+                            decoration: InputDecoration(
+                              labelText: "Email",
+                              labelStyle: const TextStyle(
+                                color: Color(0xFF00030A), // dark menubar black
+                              ),
+                              prefixIcon: const Icon(
+                                Icons.email,
+                                color: Color(0xFF00030A),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  color: Color(0xFF15F345), // green focus
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
                               ),
                             ),
                           ),
-                        ),
+                          const SizedBox(height: 20),
+
+                          // Password
+                          TextField(
+                            controller: passwordController,
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              labelText: "Password",
+                              labelStyle: const TextStyle(
+                                color: Color(0xFF00030A),
+                              ),
+                              prefixIcon: const Icon(
+                                Icons.lock,
+                                color: Color(0xFF00030A),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  color: Color(0xFF15F345),
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 30),
+
+                          // Login Button
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color.fromARGB(
+                                  255,
+                                  20,
+                                  167,
+                                  4,
+                                ), // green button
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 14,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(14),
+                                ),
+                              ),
+                              onPressed: login,
+                              child: const Text(
+                                "Login",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
+
+                // Tractor animation
+                // Lottie.asset(
+                //   "assets/animations/Farmers_Tractor.json",
+                //   height: 160,
+                //   repeat: true,
+                // ),
+              ],
             ),
           ),
         ),

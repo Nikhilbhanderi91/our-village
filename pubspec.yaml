@@ -31,3 +31,7 @@ flutter:
   assets:
     - assets/animations/Home.lottie
     - assets/animations/village.json
+    - assets/animations/Farmers_Tractor.json
+    - assets/animations/Farmers_Tractor.lottie
+    - assets/logo.jpeg
+    - assets/images/w.jpg
