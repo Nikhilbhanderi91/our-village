@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/sidebar.dart';
 import 'package:ourvillage/theme/app_theme.dart';
+import 'package:ourvillage/screens/weather/weather_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -17,20 +18,64 @@ class _DashboardScreenState extends State<DashboardScreen>
 
   final List<Map<String, dynamic>> dashboardItems = [
     {"titleEn": "Events 📅", "titleGu": "ઇવેન્ટ્સ 📅", "icon": Icons.event},
-    {"titleEn": "About Village 🏡", "titleGu": "ગામ વિષે 🏡", "icon": Icons.info},
+    {
+      "titleEn": "About Village 🏡",
+      "titleGu": "ગામ વિષે 🏡",
+      "icon": Icons.info,
+    },
     {"titleEn": "Gallery 🖼️", "titleGu": "ગેલેરી 🖼️", "icon": Icons.photo},
     {"titleEn": "Weather ☀️", "titleGu": "હવામાન ☀️", "icon": Icons.wb_sunny},
-    {"titleEn": "Contacts 📞", "titleGu": "સંપર્ક 📞", "icon": Icons.contact_phone},
-    {"titleEn": "Village Map 🗺️", "titleGu": "ગામ નકશો 🗺️", "icon": Icons.map},
-    {"titleEn": "Daily Quotes 💡", "titleGu": "દૈનિક કોટ્સ 💡", "icon": Icons.lightbulb},
-    {"titleEn": "Announcements 📢", "titleGu": "અધિસૂચનાઓ 📢", "icon": Icons.campaign},
-    {"titleEn": "Shops & Services 🛒", "titleGu": "શોપ્સ & સર્વિસિસ 🛒", "icon": Icons.store},
+    {
+      "titleEn": "Contacts 📞",
+      "titleGu": "સંપર્ક 📞",
+      "icon": Icons.contact_phone,
+    },
+    {
+      "titleEn": "Village Map 🗺️",
+      "titleGu": "ગામ નકશો 🗺️",
+      "icon": Icons.map,
+    },
+    {
+      "titleEn": "Daily Quotes 💡",
+      "titleGu": "દૈનિક કોટ્સ 💡",
+      "icon": Icons.lightbulb,
+    },
+    {
+      "titleEn": "Announcements 📢",
+      "titleGu": "અધિસૂચનાઓ 📢",
+      "icon": Icons.campaign,
+    },
+    {
+      "titleEn": "Shops & Services 🛒",
+      "titleGu": "શોપ્સ & સર્વિસિસ 🛒",
+      "icon": Icons.store,
+    },
     {"titleEn": "Education 🎓", "titleGu": "શિક્ષણ 🎓", "icon": Icons.school},
-    {"titleEn": "Health 🏥", "titleGu": "આરોગ્ય 🏥", "icon": Icons.health_and_safety},
-    {"titleEn": "Jobs & Opportunities 💼", "titleGu": "જોબ્સ & મોકા 💼", "icon": Icons.work},
-    {"titleEn": "Transport 🚍", "titleGu": "પરિવહન 🚍", "icon": Icons.directions_bus},
-    {"titleEn": "Culture & Festivals 🎉", "titleGu": "સાંસ્કૃતિક & તહેવારો 🎉", "icon": Icons.celebration},
-    {"titleEn": "Tourism & Places 🌄", "titleGu": "પ્રદેશ & પ્રવાસ 🌄", "icon": Icons.landscape},
+    {
+      "titleEn": "Health 🏥",
+      "titleGu": "આરોગ્ય 🏥",
+      "icon": Icons.health_and_safety,
+    },
+    {
+      "titleEn": "Jobs & Opportunities 💼",
+      "titleGu": "જોબ્સ & મોકા 💼",
+      "icon": Icons.work,
+    },
+    {
+      "titleEn": "Transport 🚍",
+      "titleGu": "પરિવહન 🚍",
+      "icon": Icons.directions_bus,
+    },
+    {
+      "titleEn": "Culture & Festivals 🎉",
+      "titleGu": "સાંસ્કૃતિક & તહેવારો 🎉",
+      "icon": Icons.celebration,
+    },
+    {
+      "titleEn": "Tourism & Places 🌄",
+      "titleGu": "પ્રદેશ & પ્રવાસ 🌄",
+      "icon": Icons.landscape,
+    },
   ];
 
   @override
@@ -106,7 +151,9 @@ class _DashboardScreenState extends State<DashboardScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    isEnglish ? "Welcome to Our Village" : "આપનું આપના ગામમાં સ્વાગત છે",
+                    isEnglish
+                        ? "Welcome to Our Village"
+                        : "આપનું આપના ગામમાં સ્વાગત છે",
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 28,
@@ -168,7 +215,9 @@ class _DashboardScreenState extends State<DashboardScreen>
             GridView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: filteredItems.length - 5 > 0 ? filteredItems.length - 5 : 0,
+              itemCount: filteredItems.length - 5 > 0
+                  ? filteredItems.length - 5
+                  : 0,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisSpacing: 16,
@@ -189,9 +238,18 @@ class _DashboardScreenState extends State<DashboardScreen>
   Widget highlightCard(Map<String, dynamic> item) {
     return GestureDetector(
       onTap: () {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(isEnglish ? item["titleEn"] : item["titleGu"])),
-        );
+        if (item["titleEn"] == "Weather ☀️") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const WeatherScreen()),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(isEnglish ? item["titleEn"] : item["titleGu"]),
+            ),
+          );
+        }
       },
       child: Container(
         width: 150,
@@ -233,14 +291,26 @@ class _DashboardScreenState extends State<DashboardScreen>
   Widget dashboardCard(Map<String, dynamic> item) {
     return GestureDetector(
       onTap: () {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(isEnglish ? item["titleEn"] : item["titleGu"])),
-        );
+        if (item["titleEn"] == "Weather ☀️") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const WeatherScreen()),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(isEnglish ? item["titleEn"] : item["titleGu"]),
+            ),
+          );
+        }
       },
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [AppTheme.primaryVariant, AppTheme.secondary.withOpacity(0.6)],
+            colors: [
+              AppTheme.primaryVariant,
+              AppTheme.secondary.withOpacity(0.6),
+            ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
