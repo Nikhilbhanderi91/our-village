@@ -18,7 +18,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
-  flutter_launcher_icons: ^0.14.4
+  flutter_launcher_icons: ^0.10.0
 
 flutter_icons:
   android: true
@@ -29,9 +29,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/animations/Home.lottie
-    - assets/animations/village.json
-    - assets/animations/Farmers_Tractor.json
-    - assets/animations/Farmers_Tractor.lottie
     - assets/logo.jpeg
-    - assets/images/w.jpg
+    - assets/spalsh.jpeg
+    - assets/animations/Weather_icon.json
+    - assets/animations/Weather_Night-rain.json

@@ -1,94 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
-  // 🌳 Brand palette for Village App
-  static const Color primaryColor = Color(0xFF43A047); // Village green
-  static const Color secondaryColor = Color(0xFFFFF8E1); // Soft sunlight
-  static const Color accentColor = Color(0xFFFF7043); // Sunrise orange
-  static const Color textColor = Color(0xFF3E2723); // Earthy brown
-  static const Color highlightColor = Color(0xFFFBC02D); // Mustard yellow
-  static const Color successColor = Color(
-    0xFF2E7D32,
-  ); // Deep green for success ✔
+  static const Color primary = Color(0xFF4CAF50);
+  static const Color primaryVariant = Color(0xFF388E3C);
+  static const Color secondary = Color(0xFF8BC34A);
+  static const Color background = Color(0xFFF1F8E9);
+  static const Color surface = Colors.white;
+  static const Color error = Color(0xFFF44336);
+  static const Color onPrimary = Colors.white;
+  static const Color onBackground = Color(0xFF333333);
 
-  static ThemeData light() {
-    final base = ThemeData(
-      useMaterial3: true,
-      colorScheme: const ColorScheme(
-        brightness: Brightness.light,
-        primary: primaryColor,
-        onPrimary: Colors.white,
-        secondary: secondaryColor,
-        onSecondary: textColor,
-        error: Colors.red,
-        onError: Colors.white,
-        surface: secondaryColor,
-        onSurface: textColor,
-        tertiary: accentColor,
+  static ThemeData lightTheme = ThemeData(
+    primaryColor: primary,
+    scaffoldBackgroundColor: background,
+    colorScheme: ColorScheme(
+      brightness: Brightness.light,
+      primary: primary,
+      onPrimary: onPrimary,
+      secondary: secondary,
+      onSecondary: Colors.white,
+      background: background,
+      onBackground: onBackground,
+      surface: surface,
+      onSurface: onBackground,
+      error: error,
+      onError: Colors.white,
+    ),
+    appBarTheme: const AppBarTheme(
+      backgroundColor: primary,
+      foregroundColor: onPrimary,
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: primary,
+        foregroundColor: onPrimary,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
-      scaffoldBackgroundColor: secondaryColor,
-      appBarTheme: const AppBarTheme(
-        backgroundColor: primaryColor,
-        foregroundColor: Colors.white,
-        elevation: 2,
-        centerTitle: true,
-        titleTextStyle: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 20,
-          color: Colors.white,
-        ),
-      ),
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: accentColor,
-          foregroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(14),
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-          textStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-        ),
-      ),
-      inputDecorationTheme: InputDecorationTheme(
-        filled: true,
-        fillColor: Colors.white,
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 14,
-          vertical: 14,
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: primaryColor, width: 1),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: accentColor, width: 2),
-        ),
-      ),
-      floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        backgroundColor: accentColor,
-        foregroundColor: Colors.white,
-      ),
-    );
-
-    return base.copyWith(
-      textTheme: GoogleFonts.poppinsTextTheme(
-        base.textTheme,
-      ).apply(bodyColor: textColor, displayColor: textColor),
-    );
-  }
-
-  // ✅ Reusable text styles
-  static TextStyle headingStyle = GoogleFonts.poppins(
-    fontSize: 24,
-    fontWeight: FontWeight.bold,
-    color: textColor,
-  );
-
-  static TextStyle subHeadingStyle = GoogleFonts.poppins(
-    fontSize: 16,
-    fontWeight: FontWeight.w500,
-    color: textColor.withOpacity(0.8),
+    ),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: secondary,
+      foregroundColor: Colors.white,
+    ),
   );
 }

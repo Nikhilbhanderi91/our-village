@@ -1,8 +1,6 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
-import 'login_screen.dart';
 import 'package:ourvillage/theme/app_theme.dart';
+import 'login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -11,113 +9,107 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _fadeInAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 2),
-    );
-    _fadeInAnimation = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeIn,
-    );
-    _controller.forward();
-
-    // Navigate to login screen after 8 seconds
-    Timer(const Duration(seconds: 8), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const LoginScreen()),
-      );
-    });
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
+class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              AppTheme.primaryColor,
-              AppTheme.accentColor,
-              AppTheme.successColor,
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          // Background Image
+          Image.asset(
+            "assets/spalsh.jpeg", // <-- Your splash image
+            fit: BoxFit.cover,
           ),
-        ),
 
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // 🎬 Lottie Animation
-            Lottie.asset(
-              'assets/animations/village.json',
-              width: 200,
-              height: 200,
-              fit: BoxFit.contain,
-              repeat: true,
-            ),
+          // Dark overlay for readability
+          Container(color: Colors.black.withOpacity(0.35)),
 
-            const SizedBox(height: 16),
-
-            // 🌟 Animated Text
-            FadeTransition(
-              opacity: _fadeInAnimation,
+          // Content
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const Spacer(),
+
+                  // App Name
                   Text(
                     "Our Village App",
-                    style: AppTheme.headingStyle.copyWith(
-                      color: Colors.white, // Override if needed
-                      fontSize: 32,
-                      shadows: const [
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: 1.2,
+                      shadows: [
                         Shadow(
+                          color: Colors.black.withOpacity(0.6),
                           blurRadius: 6,
-                          color: Colors.black54,
-                          offset: Offset(2, 2),
+                          offset: const Offset(2, 2),
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 6),
+                  const SizedBox(height: 14),
+
+                  // Long tagline / description
                   Text(
-                    "Connecting People Together",
-                    style: AppTheme.subHeadingStyle.copyWith(
-                      color: Colors.white70,
-                      fontStyle: FontStyle.italic,
-                      shadows: const [
-                        Shadow(
-                          blurRadius: 4,
-                          color: Colors.black45,
-                          offset: Offset(1, 1),
-                        ),
-                      ],
+                    "Connecting People Together, Sharing Stories, "
+                    "Celebrating Culture, and Building a Stronger "
+                    "Community Across Every Village and Town.",
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: Colors.white.withOpacity(0.9),
+                      fontSize: 16,
+                      height: 1.5,
+                      letterSpacing: 0.5,
                     ),
                   ),
+                  const SizedBox(height: 30),
+
+                  // Get Started Button
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(40),
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        elevation: 8,
+                        shadowColor: Colors.black45,
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (_) => const LoginScreen(),
+                          ),
+                        );
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Get Started",
+                            style: TextStyle(
+                              color: AppTheme.primary,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Icon(Icons.arrow_forward, color: AppTheme.primary),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 50),
                 ],
               ),
             ),
-
-            const SizedBox(height: 30),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
