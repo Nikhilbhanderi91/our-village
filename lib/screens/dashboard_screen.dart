@@ -4,7 +4,9 @@ import 'package:ourvillage/theme/app_theme.dart';
 import 'contacts_screen.dart';
 import 'event_screen.dart';
 import 'about_village_screen.dart';
-import 'package:ourvillage/screens/weather/splash_weather.dart';
+import 'package:ourvillage/screens/weather/home_weather.dart';
+import 'package:ourvillage/screens/announcement_screen.dart';
+import 'package:ourvillage/screens/village_map_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -41,11 +43,11 @@ class _DashboardScreenState extends State<DashboardScreen>
     {"titleEn": "Events", "titleGu": "ઇવેન્ટ્સ", "icon": Icons.event, "emoji": "📅", "route": "events"},
     {"titleEn": "About Village", "titleGu": "ગામ વિષે", "icon": Icons.info, "emoji": "🏡", "route": "about"},
     {"titleEn": "Gallery", "titleGu": "ગેલેરી", "icon": Icons.photo, "emoji": "🖼️"},
-    {"titleEn": "Weather", "titleGu": "હવામાન", "icon": Icons.wb_sunny, "emoji": "☀️", "route": "weather"},
+    // {"titleEn": "Weather", "titleGu": "હવામાન", "icon": Icons.wb_sunny, "emoji": "☀️", "route": "weather"},
     {"titleEn": "Contacts", "titleGu": "સંપર્ક", "icon": Icons.contact_phone, "emoji": "📞", "route": "contacts"},
-    {"titleEn": "Village Map", "titleGu": "ગામ નકશો", "icon": Icons.map, "emoji": "🗺️"},
+    {"titleEn": "Village Map", "titleGu": "ગામ નકશો", "icon": Icons.map, "emoji": "🗺️", "route": "village_map"},
     {"titleEn": "Daily Quotes", "titleGu": "દૈનિક કોટ્સ", "icon": Icons.lightbulb, "emoji": "💡"},
-    {"titleEn": "Announcements", "titleGu": "અધિસૂચનાઓ", "icon": Icons.campaign, "emoji": "📢"},
+    {"titleEn": "Announcements", "titleGu": "અધિસૂચનાઓ", "icon": Icons.campaign, "emoji": "📢", "route": "announcements"},
     {"titleEn": "Shops & Services", "titleGu": "શોપ્સ & સર્વિસિસ", "icon": Icons.store, "emoji": "🛒"},
     {"titleEn": "Education", "titleGu": "શિક્ષણ", "icon": Icons.school, "emoji": "🎓"},
     {"titleEn": "Health", "titleGu": "આરોગ્ય", "icon": Icons.health_and_safety, "emoji": "🏥"},
@@ -82,23 +84,33 @@ class _DashboardScreenState extends State<DashboardScreen>
       case "events":
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) => EventScreen(isEnglish: isEnglish),
-          ),
+          MaterialPageRoute(builder: (context) => EventScreen(isEnglish: isEnglish)),
         );
         break;
       case "about":
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) => AboutVillageScreen(isEnglish: isEnglish),
-          ),
+          MaterialPageRoute(builder: (context) => AboutVillageScreen(isEnglish: isEnglish)),
         );
         break;
       case "weather":
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const SplashWeather()),
+          MaterialPageRoute(builder: (context) => const HomeWeather()),
+        );
+        break;
+      case "announcements":
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => AnnouncementScreen(isEnglish: isEnglish),
+          ),
+        );
+        break;
+      case "village_map":
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const VillageMapScreen()),
         );
         break;
       default:
@@ -131,11 +143,7 @@ class _DashboardScreenState extends State<DashboardScreen>
         elevation: 0,
         title: Text(
           isEnglish ? "Our Village" : "અમારું ગામ",
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-            color: Colors.white,
-          ),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
         ),
         actions: [
           Container(
@@ -159,7 +167,6 @@ class _DashboardScreenState extends State<DashboardScreen>
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
-          // Header with Search
           SliverToBoxAdapter(
             child: Container(
               width: double.infinity,
@@ -170,59 +177,32 @@ class _DashboardScreenState extends State<DashboardScreen>
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(30),
-                  bottomRight: Radius.circular(30),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 20,
-                    offset: const Offset(0, 10),
-                  ),
-                ],
+                borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
+                boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 20, offset: const Offset(0, 10))],
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     isEnglish ? "Welcome to Our Village! 👋" : "આપનું આપના ગામમાં સ્વાગત છે! 👋",
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      height: 1.3,
-                    ),
+                    style: const TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold, height: 1.3),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     isEnglish
                         ? "Explore everything your village has to offer"
                         : "તમારા ગામમાં ઉપલબ્ધ બધું જ શોધો",
-                    style: TextStyle(
-                      color: Colors.white.withOpacity(0.9),
-                      fontSize: 16,
-                    ),
+                    style: TextStyle(color: Colors.white.withOpacity(0.9), fontSize: 16),
                   ),
                   const SizedBox(height: 20),
                   Container(
                     decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 10,
-                          offset: const Offset(0, 5),
-                        ),
-                      ],
+                      boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 10, offset: const Offset(0, 5))],
                     ),
                     child: TextField(
-                      onChanged: (value) {
-                        setState(() {
-                          searchQuery = value;
-                        });
-                      },
+                      onChanged: (value) => setState(() => searchQuery = value),
                       style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                         hintText: isEnglish ? "Search features..." : "ફીચર્સ શોધો...",
@@ -237,7 +217,6 @@ class _DashboardScreenState extends State<DashboardScreen>
               ),
             ),
           ),
-
           // Quick Stats
           SliverToBoxAdapter(
             child: Padding(
@@ -245,14 +224,8 @@ class _DashboardScreenState extends State<DashboardScreen>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    isEnglish ? "Quick Stats" : "ઝડપી આંકડા",
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
-                  ),
+                  Text(isEnglish ? "Quick Stats" : "ઝડપી આંકડા",
+                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87)),
                   const SizedBox(height: 12),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
@@ -272,33 +245,20 @@ class _DashboardScreenState extends State<DashboardScreen>
               ),
             ),
           ),
-
-          // Categories Title
+          // Categories
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    isEnglish ? "Categories" : "કેટેગરીઝ",
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  Text(
-                    "${filteredItems.length} ${isEnglish ? "items" : "આઇટમ્સ"}",
-                    style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
-                  ),
+                  Text(isEnglish ? "Categories" : "કેટેગરીઝ", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black87)),
+                  Text("${filteredItems.length} ${isEnglish ? "items" : "આઇટમ્સ"}", style: TextStyle(fontSize: 14, color: Colors.grey.shade600)),
                 ],
               ),
             ),
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 16)),
-
-          // Main Grid
           SliverPadding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             sliver: SliverGrid(
