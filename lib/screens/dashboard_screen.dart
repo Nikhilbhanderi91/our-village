@@ -7,6 +7,9 @@ import 'about_village_screen.dart';
 import 'package:ourvillage/screens/weather/home_weather.dart';
 import 'package:ourvillage/screens/announcement_screen.dart';
 import 'package:ourvillage/screens/village_map_screen.dart';
+import 'package:ourvillage/screens/transport_screen.dart';
+import 'package:ourvillage/screens/culture_festivals_screen.dart';
+import 'package:ourvillage/screens/education_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -43,17 +46,16 @@ class _DashboardScreenState extends State<DashboardScreen>
     {"titleEn": "Events", "titleGu": "ઇવેન્ટ્સ", "icon": Icons.event, "emoji": "📅", "route": "events"},
     {"titleEn": "About Village", "titleGu": "ગામ વિષે", "icon": Icons.info, "emoji": "🏡", "route": "about"},
     {"titleEn": "Gallery", "titleGu": "ગેલેરી", "icon": Icons.photo, "emoji": "🖼️"},
-    // {"titleEn": "Weather", "titleGu": "હવામાન", "icon": Icons.wb_sunny, "emoji": "☀️", "route": "weather"},
     {"titleEn": "Contacts", "titleGu": "સંપર્ક", "icon": Icons.contact_phone, "emoji": "📞", "route": "contacts"},
     {"titleEn": "Village Map", "titleGu": "ગામ નકશો", "icon": Icons.map, "emoji": "🗺️", "route": "village_map"},
     {"titleEn": "Daily Quotes", "titleGu": "દૈનિક કોટ્સ", "icon": Icons.lightbulb, "emoji": "💡"},
     {"titleEn": "Announcements", "titleGu": "અધિસૂચનાઓ", "icon": Icons.campaign, "emoji": "📢", "route": "announcements"},
     {"titleEn": "Shops & Services", "titleGu": "શોપ્સ & સર્વિસિસ", "icon": Icons.store, "emoji": "🛒"},
-    {"titleEn": "Education", "titleGu": "શિક્ષણ", "icon": Icons.school, "emoji": "🎓"},
+    {"titleEn": "Education", "titleGu": "શિક્ષણ", "icon": Icons.school, "emoji": "🎓", "route": "education"},
     {"titleEn": "Health", "titleGu": "આરોગ્ય", "icon": Icons.health_and_safety, "emoji": "🏥"},
     {"titleEn": "Jobs & Opportunities", "titleGu": "જોબ્સ & મોકા", "icon": Icons.work, "emoji": "💼"},
-    {"titleEn": "Transport", "titleGu": "પરિવહન", "icon": Icons.directions_bus, "emoji": "🚍"},
-    {"titleEn": "Culture & Festivals", "titleGu": "સાંસ્કૃતિક & તહેવારો", "icon": Icons.celebration, "emoji": "🎉"},
+    {"titleEn": "Transport", "titleGu": "પરિવહન", "icon": Icons.directions_bus, "emoji": "🚌", "route": "transport"},
+    {"titleEn": "Culture & Festivals", "titleGu": "સાંસ્કૃતિક & તહેવારો", "icon": Icons.celebration, "emoji": "🎉", "route": "culture_festivals"},
     {"titleEn": "Tourism & Places", "titleGu": "પ્રદેશ & પ્રવાસ", "icon": Icons.landscape, "emoji": "🌄"},
   ];
 
@@ -76,42 +78,31 @@ class _DashboardScreenState extends State<DashboardScreen>
   void _handleItemTap(Map<String, dynamic> item) {
     switch (item["route"]) {
       case "contacts":
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const ContactsScreen()),
-        );
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactsScreen()));
         break;
       case "events":
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => EventScreen(isEnglish: isEnglish)),
-        );
+        Navigator.push(context, MaterialPageRoute(builder: (context) => EventScreen(isEnglish: isEnglish)));
         break;
       case "about":
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => AboutVillageScreen(isEnglish: isEnglish)),
-        );
+        Navigator.push(context, MaterialPageRoute(builder: (context) => AboutVillageScreen(isEnglish: isEnglish)));
         break;
       case "weather":
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const HomeWeather()),
-        );
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeWeather()));
         break;
       case "announcements":
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => AnnouncementScreen(isEnglish: isEnglish),
-          ),
-        );
+        Navigator.push(context, MaterialPageRoute(builder: (context) => AnnouncementScreen(isEnglish: isEnglish)));
         break;
       case "village_map":
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const VillageMapScreen()),
-        );
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const VillageMapScreen()));
+        break;
+      case "transport":
+        Navigator.push(context, MaterialPageRoute(builder: (context) => TransportScreen(isEnglish: isEnglish)));
+        break;
+      case "culture_festivals":
+        Navigator.push(context, MaterialPageRoute(builder: (context) => CultureFestivalsScreen(isEnglish: isEnglish)));
+        break;
+      case "education":
+        Navigator.push(context, MaterialPageRoute(builder: (context) => EducationScreen(isEnglish: isEnglish)));
         break;
       default:
         ScaffoldMessenger.of(context).showSnackBar(
@@ -124,7 +115,6 @@ class _DashboardScreenState extends State<DashboardScreen>
         break;
     }
   }
-
   Color _getItemColor(int index) {
     return _colorPalette[index % _colorPalette.length];
   }
@@ -154,11 +144,7 @@ class _DashboardScreenState extends State<DashboardScreen>
             ),
             child: IconButton(
               icon: const Icon(Icons.language, color: Colors.white),
-              onPressed: () {
-                setState(() {
-                  isEnglish = !isEnglish;
-                });
-              },
+              onPressed: () => setState(() => isEnglish = !isEnglish),
               tooltip: isEnglish ? "Switch to Gujarati" : "Switch to English",
             ),
           ),
@@ -167,18 +153,24 @@ class _DashboardScreenState extends State<DashboardScreen>
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
+          // Header
           SliverToBoxAdapter(
             child: Container(
               width: double.infinity,
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [AppTheme.primary, AppTheme.secondary],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+                color: AppTheme.primary,
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(30),
+                  bottomRight: Radius.circular(30),
                 ),
-                borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
-                boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 20, offset: const Offset(0, 10))],
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 20,
+                    offset: const Offset(0, 10),
+                  ),
+                ],
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -217,6 +209,7 @@ class _DashboardScreenState extends State<DashboardScreen>
               ),
             ),
           ),
+
           // Quick Stats
           SliverToBoxAdapter(
             child: Padding(
@@ -224,20 +217,34 @@ class _DashboardScreenState extends State<DashboardScreen>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(isEnglish ? "Quick Stats" : "ઝડપી આંકડા",
-                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87)),
+                  Text(
+                    isEnglish ? "Quick Stats" : "ઝડપી આંકડા",
+                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87),
+                  ),
                   const SizedBox(height: 12),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: [
-                        _buildStatCard(isEnglish ? "Active Events" : "સક્રિય ઇવેન્ટ્સ", "12", Icons.event_available, Colors.green),
+                        InkWell(
+                          onTap: () => _handleItemTap(dashboardItems.firstWhere((e) => e["route"] == "events")),
+                          child: _buildStatCard(isEnglish ? "Active Events" : "સક્રિય ઇવેન્ટ્સ", "12", Icons.event_available, Colors.green),
+                        ),
                         const SizedBox(width: 12),
-                        _buildStatCard(isEnglish ? "New Updates" : "નવી અપડેટ્સ", "5", Icons.update, Colors.blue),
+                        InkWell(
+                          onTap: () => _handleItemTap(dashboardItems.firstWhere((e) => e["route"] == "announcements")),
+                          child: _buildStatCard(isEnglish ? "New Updates" : "નવી અપડેટ્સ", "5", Icons.update, Colors.blue),
+                        ),
                         const SizedBox(width: 12),
-                        _buildStatCard(isEnglish ? "Services" : "સેવાઓ", "24", Icons.business_center, Colors.orange),
+                        InkWell(
+                          onTap: () => _handleItemTap(dashboardItems.firstWhere((e) => e["route"] == "services", orElse: () => {})),
+                          child: _buildStatCard(isEnglish ? "Services" : "સેવાઓ", "24", Icons.business_center, Colors.orange),
+                        ),
                         const SizedBox(width: 12),
-                        _buildStatCard(isEnglish ? "Members" : "સભ્યો", "150+", Icons.people, Colors.purple),
+                        InkWell(
+                          onTap: () => _handleItemTap(dashboardItems.firstWhere((e) => e["route"] == "members", orElse: () => {})),
+                          child: _buildStatCard(isEnglish ? "Members" : "સભ્યો", "150+", Icons.people, Colors.purple),
+                        ),
                       ],
                     ),
                   ),
@@ -245,6 +252,7 @@ class _DashboardScreenState extends State<DashboardScreen>
               ),
             ),
           ),
+
           // Categories
           SliverToBoxAdapter(
             child: Padding(
@@ -252,27 +260,24 @@ class _DashboardScreenState extends State<DashboardScreen>
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(isEnglish ? "Categories" : "કેટેગરીઝ", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black87)),
-                  Text("${filteredItems.length} ${isEnglish ? "items" : "આઇટમ્સ"}", style: TextStyle(fontSize: 14, color: Colors.grey.shade600)),
+                  Text(isEnglish ? "Categories" : "કેટેગરીઝ",
+                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black87)),
+                  Text("${filteredItems.length} ${isEnglish ? "items" : "આઇટમ્સ"}",
+                      style: TextStyle(fontSize: 14, color: Colors.grey.shade600)),
                 ],
               ),
             ),
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 16)),
+
+          // Category Grid
           SliverPadding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             sliver: SliverGrid(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 16,
-                crossAxisSpacing: 16,
-                childAspectRatio: 1.1,
-              ),
+                  crossAxisCount: 2, mainAxisSpacing: 16, crossAxisSpacing: 16, childAspectRatio: 1.1),
               delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                  final item = filteredItems[index];
-                  return _buildCategoryCard(item, index);
-                },
+                    (context, index) => _buildCategoryCard(filteredItems[index], index),
                 childCount: filteredItems.length,
               ),
             ),
