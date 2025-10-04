@@ -34,7 +34,13 @@ class AppTheme {
       style: ElevatedButton.styleFrom(
         backgroundColor: primary,
         foregroundColor: onPrimary,
+<<<<<<< HEAD
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+=======
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+>>>>>>> d832061e79b98c6213e9de65a183ec1f82ae884f
       ),
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
@@ -42,4 +48,8 @@ class AppTheme {
       foregroundColor: Colors.white,
     ),
   );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> d832061e79b98c6213e9de65a183ec1f82ae884f

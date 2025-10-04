@@ -12,7 +12,12 @@ dependencies:
     sdk: flutter
   google_fonts: ^5.0.0
   cupertino_icons: ^1.0.8
+<<<<<<< HEAD
   lottie: ^3.1.0
+=======
+  url_launcher: ^6.2.0
+  google_maps_flutter: ^2.3.0
+>>>>>>> d832061e79b98c6213e9de65a183ec1f82ae884f
 
 dev_dependencies:
   flutter_test:
@@ -20,7 +25,7 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   flutter_launcher_icons: ^0.10.0
 
-flutter_icons:
+flutter_icons:            
   android: true
   ios: true
   image_path: "assets/logo.jpeg"
@@ -31,5 +36,8 @@ flutter:
   assets:
     - assets/logo.jpeg
     - assets/spalsh.jpeg
+<<<<<<< HEAD
     - assets/animations/Weather_icon.json
     - assets/animations/Weather_Night-rain.json
+=======
+>>>>>>> d832061e79b98c6213e9de65a183ec1f82ae884f

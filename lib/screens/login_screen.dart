@@ -53,7 +53,13 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
 
           // Optional dark overlay for contrast
+<<<<<<< HEAD
           Container(color: Colors.black.withOpacity(0.2)),
+=======
+          Container(
+            color: Colors.black.withOpacity(0.2),
+          ),
+>>>>>>> d832061e79b98c6213e9de65a183ec1f82ae884f
 
           // Centered glass login container
           Center(
@@ -68,7 +74,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.3), // more solid
                       borderRadius: BorderRadius.circular(20),
+<<<<<<< HEAD
                       border: Border.all(color: Colors.white.withOpacity(0.3)),
+=======
+                      border: Border.all(
+                        color: Colors.white.withOpacity(0.3),
+                      ),
+>>>>>>> d832061e79b98c6213e9de65a183ec1f82ae884f
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.1),
@@ -95,10 +107,15 @@ class _LoginScreenState extends State<LoginScreen> {
                           controller: emailController,
                           decoration: InputDecoration(
                             labelText: "Email",
+<<<<<<< HEAD
                             prefixIcon: Icon(
                               Icons.email,
                               color: AppTheme.primary,
                             ),
+=======
+                            prefixIcon:
+                            Icon(Icons.email, color: AppTheme.primary),
+>>>>>>> d832061e79b98c6213e9de65a183ec1f82ae884f
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
@@ -114,10 +131,15 @@ class _LoginScreenState extends State<LoginScreen> {
                           obscureText: true,
                           decoration: InputDecoration(
                             labelText: "Password",
+<<<<<<< HEAD
                             prefixIcon: Icon(
                               Icons.lock,
                               color: AppTheme.primary,
                             ),
+=======
+                            prefixIcon:
+                            Icon(Icons.lock, color: AppTheme.primary),
+>>>>>>> d832061e79b98c6213e9de65a183ec1f82ae884f
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
@@ -133,7 +155,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppTheme.primary,
+<<<<<<< HEAD
                               padding: const EdgeInsets.symmetric(vertical: 14),
+=======
+                              padding:
+                              const EdgeInsets.symmetric(vertical: 14),
+>>>>>>> d832061e79b98c6213e9de65a183ec1f82ae884f
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12),
                               ),

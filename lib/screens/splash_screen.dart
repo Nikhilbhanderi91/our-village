@@ -23,7 +23,13 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
 
           // Dark overlay for readability
+<<<<<<< HEAD
           Container(color: Colors.black.withOpacity(0.35)),
+=======
+          Container(
+            color: Colors.black.withOpacity(0.35),
+          ),
+>>>>>>> d832061e79b98c6213e9de65a183ec1f82ae884f
 
           // Content
           SafeArea(
@@ -56,8 +62,13 @@ class _SplashScreenState extends State<SplashScreen> {
                   // Long tagline / description
                   Text(
                     "Connecting People Together, Sharing Stories, "
+<<<<<<< HEAD
                     "Celebrating Culture, and Building a Stronger "
                     "Community Across Every Village and Town.",
+=======
+                        "Celebrating Culture, and Building a Stronger "
+                        "Community Across Every Village and Town.",
+>>>>>>> d832061e79b98c6213e9de65a183ec1f82ae884f
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: Colors.white.withOpacity(0.9),
                       fontSize: 16,
